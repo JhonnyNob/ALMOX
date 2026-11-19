@@ -1,0 +1,1078 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Movimentar Estoque - ALMOX</title>
+
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/adicionar.css" />
+  </head>
+
+  <body>
+    <div class="app-layout">
+      <aside class="sidebar">
+        <div class="brand">
+          <h1>ALMOX</h1>
+          <p>Controle de estoque</p>
+        </div>
+
+        <nav class="main-navigation">
+          <a href="index.html" class="nav-link">
+            <span class="nav-icon">▣</span>
+            <span>Estoque</span>
+          </a>
+
+          <a href="adicionar.html" class="nav-link active">
+            <span class="nav-icon">＋</span>
+            <span>Movimentar</span>
+          </a>
+
+          <a href="historico.html" class="nav-link">
+            <span class="nav-icon">◷</span>
+            <span>Histórico</span>
+          </a>
+        </nav>
+
+        <div class="folders-section"></div>
+
+        <div class="sidebar-footer">Sistema de controle de almoxarifado</div>
+      </aside>
+
+      <main class="main-content">
+        <div class="add-page">
+          <header class="page-header">
+            <div>
+              <p class="eyebrow">ESTOQUE</p>
+
+              <h2>Movimentar estoque</h2>
+
+              <p class="page-description">
+                Registre entradas, saídas e remoções de materiais.
+              </p>
+            </div>
+          </header>
+
+          <div class="movement-tabs">
+            <button
+              type="button"
+              class="movement-tab active"
+              data-tab="entrada"
+            >
+              Entrada
+            </button>
+
+            <button type="button" class="movement-tab" data-tab="saida">
+              Saída
+            </button>
+
+            <button type="button" class="movement-tab" data-tab="remocao">
+              Remoção
+            </button>
+          </div>
+
+          <section id="entrada" class="movement-panel">
+            <form id="form-entrada" class="item-form" autocomplete="off">
+              <div class="form-card">
+                <div class="form-card-heading">
+                  <div class="form-step">01</div>
+
+                  <div>
+                    <h2>Entrada de material</h2>
+
+                    <p>
+                      Informe os dados do material que será adicionado ao
+                      estoque.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="form-grid">
+                  <div class="form-field">
+                    <label for="item-entrada"> ITEM <span>*</span> </label>
+
+                    <input
+                      type="text"
+                      id="item-entrada"
+                      name="nome"
+                      placeholder="Nome do material"
+                      list="lista-itens-entrada"
+                      required
+                    />
+
+                    <datalist id="lista-itens-entrada"></datalist>
+
+                    <small> Comece a digitar para receber sugestões. </small>
+                  </div>
+
+                  <div class="form-field">
+                    <label for="pn-entrada"> PN <span>*</span> </label>
+
+                    <input
+                      type="text"
+                      id="pn-entrada"
+                      name="pn"
+                      placeholder="Part Number"
+                      list="lista-pn-entrada"
+                      required
+                    />
+
+                    <datalist id="lista-pn-entrada"></datalist>
+
+                    <small> O PN identifica unicamente o material. </small>
+                  </div>
+
+                  <div class="form-field">
+                    <label for="quantidade-entrada"> QTD <span>*</span> </label>
+
+                    <input
+                      type="number"
+                      id="quantidade-entrada"
+                      name="quantidade"
+                      min="1"
+                      placeholder="Quantidade"
+                      required
+                    />
+                  </div>
+
+                  <div class="form-field">
+                    <label for="tipo-entrada"> TIPO </label>
+
+                    <input
+                      type="text"
+                      id="tipo-entrada"
+                      name="tipo_motor"
+                      placeholder="Tipo do motor"
+                      list="lista-tipos-motor"
+                    />
+
+                    <datalist id="lista-tipos-motor">
+                      <option value="MWM"></option>
+                      <option value="Yanmar 66X"></option>
+                      <option value="Yanmar 6LY"></option>
+                      <option value="Dong"></option>
+                      <option value="Mercedes"></option>
+                      <option value="ZF 85IV"></option>
+                      <option value="ZF 325IV"></option>
+                    </datalist>
+                  </div>
+
+                  <div class="form-field">
+                    <label for="nf-entrada"> NF </label>
+
+                    <input
+                      type="text"
+                      id="nf-entrada"
+                      name="nf"
+                      placeholder="Número da nota fiscal"
+                    />
+                  </div>
+
+                  <div class="form-field">
+                    <label for="uf-entrada"> UF </label>
+
+                    <select id="uf-entrada" name="uf">
+                      <option value="">Selecione</option>
+                      <option value="METRO">METRO</option>
+                      <option value="CONJUNTO">CONJUNTO</option>
+                      <option value="PACOTE">PACOTE</option>
+                      <option value="UNIDADE">UNIDADE</option>
+                    </select>
+                  </div>
+
+                  <div class="form-field">
+                    <label for="vlr-unit-entrada"> VLR UNIT </label>
+
+                    <div class="input-with-prefix">
+                      <span>R$</span>
+
+                      <input
+                        type="number"
+                        id="vlr-unit-entrada"
+                        name="vlr_unit"
+                        min="0"
+                        step="0.0001"
+                        placeholder="0,00"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="form-field">
+                    <label for="prat-entrada"> PRAT </label>
+
+                    <input
+                      type="text"
+                      id="prat-entrada"
+                      name="prat"
+                      placeholder="Prateleira"
+                    />
+                  </div>
+
+                  <div class="form-field">
+                    <label for="base-entrada"> BASE </label>
+
+                    <select id="base-entrada" name="base_id">
+                      <option value="">Selecione</option>
+                    </select>
+                  </div>
+
+                  <div class="form-field">
+                    <label for="max-entrada"> MAX </label>
+
+                    <input
+                      type="number"
+                      id="max-entrada"
+                      name="max"
+                      min="0"
+                      placeholder="Estoque máximo"
+                    />
+                  </div>
+
+                  <div class="form-field">
+                    <label for="min-entrada"> MIN </label>
+
+                    <input
+                      type="number"
+                      id="min-entrada"
+                      name="min"
+                      min="0"
+                      placeholder="Estoque mínimo"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-actions">
+                  <p>
+                    <span>*</span>
+                    Campos obrigatórios
+                  </p>
+
+                  <div>
+                    <button type="reset" class="button button-secondary">
+                      Limpar
+                    </button>
+
+                    <button type="submit" class="button button-primary">
+                      Registrar entrada
+                    </button>
+                  </div>
+                </div>
+
+                <div id="mensagem-entrada" class="form-message" hidden></div>
+              </div>
+            </form>
+          </section>
+
+          <section id="saida" class="movement-panel" hidden>
+            <form id="form-saida" class="item-form" autocomplete="off">
+              <div class="form-card">
+                <div class="form-card-heading">
+                  <div class="form-step">01</div>
+
+                  <div>
+                    <h2>Saída de material</h2>
+
+                    <p>
+                      Informe o material, a quantidade, a base e o centro de
+                      consumo.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="form-grid">
+                  <div class="form-field">
+                    <label for="item-saida"> ITEM <span>*</span> </label>
+
+                    <input
+                      type="text"
+                      id="item-saida"
+                      name="nome"
+                      placeholder="Nome do material"
+                      list="lista-itens-saida"
+                      required
+                    />
+
+                    <datalist id="lista-itens-saida"></datalist>
+
+                    <small> Comece a digitar para receber sugestões. </small>
+                  </div>
+
+                  <div class="form-field">
+                    <label for="pn-saida"> PN <span>*</span> </label>
+
+                    <input
+                      type="text"
+                      id="pn-saida"
+                      name="pn"
+                      placeholder="Part Number"
+                      list="lista-pn-saida"
+                      required
+                    />
+
+                    <datalist id="lista-pn-saida"></datalist>
+
+                    <small> O PN identifica unicamente o material. </small>
+                  </div>
+
+                  <div class="form-field">
+                    <label for="quantidade-saida"> QTD <span>*</span> </label>
+
+                    <input
+                      type="number"
+                      id="quantidade-saida"
+                      name="quantidade"
+                      min="1"
+                      placeholder="Quantidade"
+                      required
+                    />
+                  </div>
+
+                  <div class="form-field">
+                    <label for="centro-consumo-saida">
+                      CENTRO DE CONSUMO <span>*</span>
+                    </label>
+
+                    <input
+                      type="text"
+                      id="centro-consumo-saida"
+                      name="centro_consumo"
+                      placeholder="Ex.: Pilot 01"
+                      list="lista-centros-consumo"
+                      required
+                    />
+
+                    <datalist id="lista-centros-consumo">
+                      <option value="Pilot 01"></option>
+                      <option value="Pilot 02"></option>
+                      <option value="Pilot 03"></option>
+                      <option value="Pilot 04"></option>
+                      <option value="Pilot 05"></option>
+                      <option value="Pilot 06"></option>
+                      <option value="Pilot 07"></option>
+                      <option value="Pilot 08"></option>
+                      <option value="Pilot 09"></option>
+                      <option value="Pilot 10"></option>
+                      <option value="Pilot 11"></option>
+                      <option value="Pilot 12"></option>
+                      <option value="Pilot 13"></option>
+                      <option value="Pilot 14"></option>
+                      <option value="Pilot 15"></option>
+                      <option value="Pilot 16"></option>
+                      <option value="Pilot 17"></option>
+                      <option value="Pilot 18"></option>
+                      <option value="Pilot 19"></option>
+                      <option value="Pilot 20"></option>
+                    </datalist>
+                  </div>
+
+                  <div class="form-field">
+                    <label for="base-saida"> BASE <span>*</span> </label>
+
+                    <select id="base-saida" name="base_id" required>
+                      <option value="">Selecione</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-actions">
+                  <p>
+                    <span>*</span>
+                    Campos obrigatórios
+                  </p>
+
+                  <div>
+                    <button type="reset" class="button button-secondary">
+                      Limpar
+                    </button>
+
+                    <button type="submit" class="button button-primary">
+                      Registrar saída
+                    </button>
+                  </div>
+                </div>
+
+                <div id="mensagem-saida" class="form-message" hidden></div>
+              </div>
+            </form>
+          </section>
+
+          <section id="remocao" class="movement-panel" hidden>
+            <form id="form-remocao" class="item-form" autocomplete="off">
+              <div class="form-card">
+                <div class="form-card-heading">
+                  <div class="form-step">01</div>
+
+                  <div>
+                    <h2>Remoção de material</h2>
+
+                    <p>Remove o material do cadastro, estoque e histórico.</p>
+                  </div>
+                </div>
+
+                <div class="form-grid">
+                  <div class="form-field">
+                    <label for="item-remocao"> ITEM <span>*</span> </label>
+
+                    <input
+                      type="text"
+                      id="item-remocao"
+                      name="nome"
+                      placeholder="Nome do material"
+                      list="lista-itens-remocao"
+                      required
+                    />
+
+                    <datalist id="lista-itens-remocao"></datalist>
+
+                    <small> Comece a digitar para receber sugestões. </small>
+                  </div>
+
+                  <div class="form-field">
+                    <label for="pn-remocao"> PN <span>*</span> </label>
+
+                    <input
+                      type="text"
+                      id="pn-remocao"
+                      name="pn"
+                      placeholder="Part Number"
+                      list="lista-pn-remocao"
+                      required
+                    />
+
+                    <datalist id="lista-pn-remocao"></datalist>
+
+                    <small> O PN identifica unicamente o material. </small>
+                  </div>
+                </div>
+
+                <div class="form-actions">
+                  <p>
+                    <span>*</span>
+                    Campos obrigatórios
+                  </p>
+
+                  <div>
+                    <button type="reset" class="button button-secondary">
+                      Limpar
+                    </button>
+
+                    <button type="submit" class="button button-primary">
+                      Remover material
+                    </button>
+                  </div>
+                </div>
+
+                <div id="mensagem-remocao" class="form-message" hidden></div>
+              </div>
+            </form>
+          </section>
+        </div>
+
+        <footer class="main-footer">
+          ALMOX
+          <span>•</span>
+          Controle de estoque
+        </footer>
+      </main>
+    </div>
+
+    <script>
+      const API_ITENS = "../api/config/itens.php";
+      const API_BASES = "../api/config/bases.php";
+      const API_MOVIMENTACOES = "../api/config/movimentacoes.php";
+
+      let itensEstoque = [];
+
+      const formEntrada = document.getElementById("form-entrada");
+
+      const formSaida = document.getElementById("form-saida");
+
+      const formRemocao = document.getElementById("form-remocao");
+
+      const itemEntrada = document.getElementById("item-entrada");
+
+      const pnEntrada = document.getElementById("pn-entrada");
+
+      const itemSaida = document.getElementById("item-saida");
+
+      const pnSaida = document.getElementById("pn-saida");
+
+      const itemRemocao = document.getElementById("item-remocao");
+
+      const pnRemocao = document.getElementById("pn-remocao");
+
+      function normalizarTexto(texto) {
+        return String(texto || "")
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "")
+          .toLowerCase()
+          .trim();
+      }
+
+      async function carregarItens() {
+        try {
+          const resposta = await fetch(API_ITENS);
+
+          const resultado = await resposta.json();
+
+          if (resultado.sucesso) {
+            itensEstoque = resultado.dados || [];
+
+            atualizarSugestoes();
+          }
+        } catch (erro) {
+          console.error("Erro ao carregar itens:", erro);
+        }
+      }
+
+      async function carregarBases() {
+        const selects = [
+          document.getElementById("base-entrada"),
+          document.getElementById("base-saida"),
+        ];
+
+        try {
+          const resposta = await fetch(API_BASES);
+
+          const resultado = await resposta.json();
+
+          if (!resultado.sucesso) {
+            return;
+          }
+
+          selects.forEach((select) => {
+            select.innerHTML = '<option value="">Selecione</option>';
+
+            resultado.dados.forEach((base) => {
+              const option = document.createElement("option");
+
+              option.value = base.id;
+              option.textContent = base.nome;
+
+              select.appendChild(option);
+            });
+
+            const transferencia = document.createElement("option");
+
+            transferencia.value = "transferencia";
+
+            transferencia.textContent = "Transferência";
+
+            select.appendChild(transferencia);
+          });
+        } catch (erro) {
+          console.error("Erro ao carregar bases:", erro);
+        }
+      }
+
+      function obterProdutosUnicos() {
+        const mapa = new Map();
+
+        itensEstoque.forEach((item) => {
+          if (!item.pn) {
+            return;
+          }
+
+          const chave = String(item.pn);
+
+          if (!mapa.has(chave)) {
+            mapa.set(chave, {
+              pn: item.pn,
+              nome: item.nome || "",
+              tipo: item.tipo || "",
+              quantidade: 0,
+              uf: item.uf || "",
+              prat: item.prat || "",
+              max: item.max ?? "",
+              min: item.min ?? "",
+            });
+          }
+
+          const produto = mapa.get(chave);
+
+          produto.quantidade += Number(item.quantidade || 0);
+
+          if (!produto.tipo && item.tipo) {
+            produto.tipo = item.tipo;
+          }
+
+          if (!produto.uf && item.uf) {
+            produto.uf = item.uf;
+          }
+
+          if (!produto.prat && item.prat) {
+            produto.prat = item.prat;
+          }
+
+          if (
+            produto.max === "" &&
+            item.max !== null &&
+            item.max !== undefined
+          ) {
+            produto.max = item.max;
+          }
+
+          if (
+            produto.min === "" &&
+            item.min !== null &&
+            item.min !== undefined
+          ) {
+            produto.min = item.min;
+          }
+        });
+
+        return Array.from(mapa.values());
+      }
+
+      function atualizarSugestoes() {
+        const produtos = obterProdutosUnicos();
+
+        const listas = [
+          "lista-pn-entrada",
+          "lista-itens-entrada",
+          "lista-pn-saida",
+          "lista-itens-saida",
+          "lista-pn-remocao",
+          "lista-itens-remocao",
+        ];
+
+        listas.forEach((id) => {
+          const elemento = document.getElementById(id);
+
+          if (elemento) {
+            elemento.innerHTML = "";
+          }
+        });
+
+        produtos.forEach((produto) => {
+          const idsPN = [
+            "lista-pn-entrada",
+            "lista-pn-saida",
+            "lista-pn-remocao",
+          ];
+
+          const idsItem = [
+            "lista-itens-entrada",
+            "lista-itens-saida",
+            "lista-itens-remocao",
+          ];
+
+          idsPN.forEach((id) => {
+            const option = document.createElement("option");
+
+            option.value = produto.pn;
+
+            option.label = `${produto.nome} | Estoque: ${produto.quantidade}`;
+
+            document.getElementById(id).appendChild(option);
+          });
+
+          idsItem.forEach((id) => {
+            const option = document.createElement("option");
+
+            option.value = produto.nome;
+
+            option.label = `${produto.pn} | Estoque: ${produto.quantidade}`;
+
+            document.getElementById(id).appendChild(option);
+          });
+        });
+      }
+
+      function encontrarProdutoPorPN(valor) {
+        const busca = normalizarTexto(valor);
+
+        if (!busca) {
+          return null;
+        }
+
+        return (
+          obterProdutosUnicos().find(
+            (produto) => normalizarTexto(produto.pn) === busca,
+          ) || null
+        );
+      }
+
+      function encontrarProdutoPorNome(valor) {
+        const busca = normalizarTexto(valor);
+
+        if (!busca) {
+          return null;
+        }
+
+        return (
+          obterProdutosUnicos().find(
+            (produto) => normalizarTexto(produto.nome) === busca,
+          ) || null
+        );
+      }
+
+      function preencherEntrada(produto) {
+        if (!produto) {
+          return;
+        }
+
+        pnEntrada.value = produto.pn || "";
+
+        itemEntrada.value = produto.nome || "";
+
+        document.getElementById("tipo-entrada").value = produto.tipo || "";
+
+        document.getElementById("uf-entrada").value = produto.uf || "";
+
+        document.getElementById("prat-entrada").value = produto.prat || "";
+
+        document.getElementById("max-entrada").value = produto.max ?? "";
+
+        document.getElementById("min-entrada").value = produto.min ?? "";
+      }
+
+      function preencherSaida(produto) {
+        if (!produto) {
+          return;
+        }
+
+        pnSaida.value = produto.pn || "";
+
+        itemSaida.value = produto.nome || "";
+      }
+
+      function preencherRemocao(produto) {
+        if (!produto) {
+          return;
+        }
+
+        pnRemocao.value = produto.pn || "";
+
+        itemRemocao.value = produto.nome || "";
+      }
+
+      function mostrarMensagem(id, mensagem, sucesso) {
+        const elemento = document.getElementById(id);
+
+        elemento.textContent = mensagem;
+
+        elemento.hidden = false;
+
+        elemento.style.borderColor = sucesso ? "#b7d8c2" : "#e0b4b4";
+
+        elemento.style.background = sucesso ? "#f1f9f3" : "#fff5f5";
+
+        elemento.style.color = sucesso ? "#245c35" : "#8a2020";
+      }
+
+      function limparMensagem(id) {
+        const elemento = document.getElementById(id);
+
+        elemento.textContent = "";
+        elemento.hidden = true;
+      }
+
+      document.querySelectorAll(".movement-tab").forEach((botao) => {
+        botao.addEventListener("click", () => {
+          const aba = botao.dataset.tab;
+
+          document.querySelectorAll(".movement-tab").forEach((item) => {
+            item.classList.remove("active");
+          });
+
+          botao.classList.add("active");
+
+          document.getElementById("entrada").hidden = aba !== "entrada";
+
+          document.getElementById("saida").hidden = aba !== "saida";
+
+          document.getElementById("remocao").hidden = aba !== "remocao";
+
+          limparMensagem("mensagem-entrada");
+
+          limparMensagem("mensagem-saida");
+
+          limparMensagem("mensagem-remocao");
+        });
+      });
+
+      pnEntrada.addEventListener("change", () => {
+        preencherEntrada(encontrarProdutoPorPN(pnEntrada.value));
+      });
+
+      itemEntrada.addEventListener("change", () => {
+        preencherEntrada(encontrarProdutoPorNome(itemEntrada.value));
+      });
+
+      pnSaida.addEventListener("change", () => {
+        preencherSaida(encontrarProdutoPorPN(pnSaida.value));
+      });
+
+      itemSaida.addEventListener("change", () => {
+        preencherSaida(encontrarProdutoPorNome(itemSaida.value));
+      });
+
+      pnRemocao.addEventListener("change", () => {
+        preencherRemocao(encontrarProdutoPorPN(pnRemocao.value));
+      });
+
+      itemRemocao.addEventListener("change", () => {
+        preencherRemocao(encontrarProdutoPorNome(itemRemocao.value));
+      });
+
+      pnEntrada.addEventListener("blur", () => {
+        setTimeout(() => {
+          preencherEntrada(encontrarProdutoPorPN(pnEntrada.value));
+        }, 100);
+      });
+
+      itemEntrada.addEventListener("blur", () => {
+        setTimeout(() => {
+          preencherEntrada(encontrarProdutoPorNome(itemEntrada.value));
+        }, 100);
+      });
+
+      pnSaida.addEventListener("blur", () => {
+        setTimeout(() => {
+          preencherSaida(encontrarProdutoPorPN(pnSaida.value));
+        }, 100);
+      });
+
+      itemSaida.addEventListener("blur", () => {
+        setTimeout(() => {
+          preencherSaida(encontrarProdutoPorNome(itemSaida.value));
+        }, 100);
+      });
+
+      pnRemocao.addEventListener("blur", () => {
+        setTimeout(() => {
+          preencherRemocao(encontrarProdutoPorPN(pnRemocao.value));
+        }, 100);
+      });
+
+      itemRemocao.addEventListener("blur", () => {
+        setTimeout(() => {
+          preencherRemocao(encontrarProdutoPorNome(itemRemocao.value));
+        }, 100);
+      });
+
+      formEntrada.addEventListener("reset", () => {
+        setTimeout(() => {
+          document.getElementById("base-entrada").value = "";
+
+          limparMensagem("mensagem-entrada");
+        }, 0);
+      });
+
+      formSaida.addEventListener("reset", () => {
+        setTimeout(() => {
+          document.getElementById("base-saida").value = "";
+
+          limparMensagem("mensagem-saida");
+        }, 0);
+      });
+
+      formRemocao.addEventListener("reset", () => {
+        setTimeout(() => {
+          limparMensagem("mensagem-remocao");
+        }, 0);
+      });
+
+      formEntrada.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        limparMensagem("mensagem-entrada");
+
+        const dados = {
+          tipo: "entrada",
+
+          nome: itemEntrada.value.trim(),
+
+          pn: pnEntrada.value.trim(),
+
+          quantidade: Number(
+            document.getElementById("quantidade-entrada").value,
+          ),
+
+          tipo_motor: document.getElementById("tipo-entrada").value.trim(),
+
+          nf: document.getElementById("nf-entrada").value.trim(),
+
+          uf: document.getElementById("uf-entrada").value,
+
+          vlr_unit: document.getElementById("vlr-unit-entrada").value,
+
+          prat: document.getElementById("prat-entrada").value.trim(),
+
+          base_id: document.getElementById("base-entrada").value,
+
+          max: document.getElementById("max-entrada").value,
+
+          min: document.getElementById("min-entrada").value,
+        };
+
+        try {
+          const resposta = await fetch(API_MOVIMENTACOES, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(dados),
+          });
+
+          const resultado = await resposta.json();
+
+          if (!resultado.sucesso) {
+            mostrarMensagem(
+              "mensagem-entrada",
+              resultado.mensagem || "Erro ao registrar entrada.",
+              false,
+            );
+
+            return;
+          }
+
+          mostrarMensagem(
+            "mensagem-entrada",
+            resultado.mensagem || "Entrada registrada com sucesso.",
+            true,
+          );
+
+          formEntrada.reset();
+
+          await carregarItens();
+        } catch (erro) {
+          mostrarMensagem(
+            "mensagem-entrada",
+            "Erro de comunicação com o servidor.",
+            false,
+          );
+        }
+      });
+
+      formSaida.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        limparMensagem("mensagem-saida");
+
+        const dados = {
+          tipo: "saida",
+
+          nome: itemSaida.value.trim(),
+
+          pn: pnSaida.value.trim(),
+
+          quantidade: Number(document.getElementById("quantidade-saida").value),
+
+          centro_consumo: document
+            .getElementById("centro-consumo-saida")
+            .value.trim(),
+
+          base_id: document.getElementById("base-saida").value,
+        };
+
+        try {
+          const resposta = await fetch(API_MOVIMENTACOES, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(dados),
+          });
+
+          const resultado = await resposta.json();
+
+          if (!resultado.sucesso) {
+            mostrarMensagem(
+              "mensagem-saida",
+              resultado.mensagem || "Erro ao registrar saída.",
+              false,
+            );
+
+            return;
+          }
+
+          mostrarMensagem(
+            "mensagem-saida",
+            resultado.mensagem || "Saída registrada com sucesso.",
+            true,
+          );
+
+          formSaida.reset();
+
+          await carregarItens();
+        } catch (erro) {
+          mostrarMensagem(
+            "mensagem-saida",
+            "Erro de comunicação com o servidor.",
+            false,
+          );
+        }
+      });
+
+      formRemocao.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        limparMensagem("mensagem-remocao");
+
+        const confirmacao = window.confirm(
+          "Tem certeza que deseja remover este material? O cadastro, estoque e histórico serão excluídos.",
+        );
+
+        if (!confirmacao) {
+          return;
+        }
+
+        const dados = {
+          acao: "remocao",
+
+          nome: itemRemocao.value.trim(),
+
+          pn: pnRemocao.value.trim(),
+        };
+
+        try {
+          const resposta = await fetch(API_MOVIMENTACOES, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(dados),
+          });
+
+          const resultado = await resposta.json();
+
+          if (!resultado.sucesso) {
+            mostrarMensagem(
+              "mensagem-remocao",
+              resultado.mensagem || "Erro ao remover material.",
+              false,
+            );
+
+            return;
+          }
+
+          mostrarMensagem(
+            "mensagem-remocao",
+            resultado.mensagem || "Material removido com sucesso.",
+            true,
+          );
+
+          formRemocao.reset();
+
+          await carregarItens();
+        } catch (erro) {
+          mostrarMensagem(
+            "mensagem-remocao",
+            "Erro de comunicação com o servidor.",
+            false,
+          );
+        }
+      });
+
+      async function iniciar() {
+        await carregarItens();
+        await carregarBases();
+      }
+
+      iniciar();
+    </script>
+  </body>
+</html>

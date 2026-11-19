@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>ALMOX | Histórico de movimentações</title>
+
+    <link rel="stylesheet" href="css/style.css" />
+
+    <script src="js/vendor/jspdf.umd.min.js"></script>
+    <script src="js/vendor/jspdf.plugin.autotable.min.js"></script>
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+
+    <script src="js/historico.js" defer></script>
+  </head>
+
+  <body>
+    <div class="app-layout">
+      <aside class="sidebar">
+        <div class="brand">
+          <h1>ALMOX</h1>
+          <p>Controle de almoxarifado</p>
+        </div>
+
+        <nav class="main-navigation" aria-label="Navegação principal">
+          <a href="index.html" class="nav-link">
+            <span class="nav-icon" aria-hidden="true"> ▣ </span>
+            Estoque
+          </a>
+
+          <a href="adicionar.html" class="nav-link">
+            <span class="nav-icon" aria-hidden="true"> ＋ </span>
+            Movimentar estoque
+          </a>
+
+          <a href="historico.html" class="nav-link active" aria-current="page">
+            <span class="nav-icon" aria-hidden="true"> ↻ </span>
+            Histórico
+          </a>
+        </nav>
+
+        <div class="sidebar-footer">
+          <p>ALMOX</p>
+          <span>Controle de estoque</span>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <header class="page-header">
+          <div>
+            <p class="eyebrow">GERENCIAMENTO</p>
+
+            <h2>Histórico de movimentações</h2>
+
+            <p class="page-description">
+              Consulte as entradas e saídas realizadas no estoque.
+            </p>
+          </div>
+
+          <div class="header-actions">
+            <select id="exportar-tipo" class="form-control">
+              <option value="entrada">Entradas</option>
+              <option value="saida">Saídas</option>
+            </select>
+
+            <select id="exportar-formato" class="form-control">
+              <option value="pdf">PDF</option>
+              <option value="excel">Excel</option>
+              <option value="nota">Nota fiscal</option>
+            </select>
+
+            <button
+              type="button"
+              id="btn-exportar"
+              class="button button-primary"
+            >
+              Exportar
+            </button>
+          </div>
+        </header>
+
+        <section class="inventory-section">
+          <div class="inventory-toolbar">
+            <div>
+              <h3>Entradas</h3>
+
+              <p>Materiais adicionados ao estoque.</p>
+            </div>
+
+            <label class="search-wrapper">
+              <span aria-hidden="true"> ⌕ </span>
+
+              <input
+                type="search"
+                id="busca-entradas"
+                class="search-input"
+                placeholder="Buscar por PN, nome, NF ou tipo..."
+                autocomplete="off"
+              />
+            </label>
+          </div>
+
+          <div class="inventory-toolbar">
+            <div>
+              <label for="data-inicial-entradas"> Data inicial </label>
+
+              <input
+                type="date"
+                id="data-inicial-entradas"
+                class="form-control"
+              />
+            </div>
+
+            <div>
+              <label for="data-final-entradas"> Data final </label>
+
+              <input
+                type="date"
+                id="data-final-entradas"
+                class="form-control"
+              />
+            </div>
+          </div>
+
+          <div class="table-container">
+            <table class="inventory-table">
+              <thead>
+                <tr>
+                  <th>Data e hora</th>
+                  <th>NF</th>
+                  <th>ITEM</th>
+                  <th>PN</th>
+                  <th>TIPO</th>
+                  <th class="text-right">QTD</th>
+                  <th class="text-right">VLR UNIT</th>
+                  <th class="text-right">VLR TOTAL</th>
+                  <th>BASE</th>
+                </tr>
+              </thead>
+
+              <tbody id="lista-entradas">
+                <tr>
+                  <td colspan="9" class="empty-state">
+                    <div class="empty-state-icon">↻</div>
+                    <strong>Carregando entradas...</strong>
+                    <p>Aguarde enquanto as entradas são carregadas.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="table-footer">
+            <span id="contador-entradas"> Aguardando dados das entradas </span>
+          </div>
+        </section>
+
+        <section class="inventory-section">
+          <div class="inventory-toolbar">
+            <div>
+              <h3>Saídas</h3>
+
+              <p>Materiais retirados do estoque.</p>
+            </div>
+
+            <label class="search-wrapper">
+              <span aria-hidden="true"> ⌕ </span>
+
+              <input
+                type="search"
+                id="busca-saidas"
+                class="search-input"
+                placeholder="Buscar por PN, nome, centro ou base..."
+                autocomplete="off"
+              />
+            </label>
+          </div>
+
+          <div class="inventory-toolbar">
+            <div>
+              <label for="data-inicial-saidas"> Data inicial </label>
+
+              <input
+                type="date"
+                id="data-inicial-saidas"
+                class="form-control"
+              />
+            </div>
+
+            <div>
+              <label for="data-final-saidas"> Data final </label>
+
+              <input type="date" id="data-final-saidas" class="form-control" />
+            </div>
+          </div>
+
+          <div class="table-container">
+            <table class="inventory-table">
+              <thead>
+                <tr>
+                  <th>Data e hora</th>
+                  <th>ITEM</th>
+                  <th>PN</th>
+                  <th>TIPO</th>
+                  <th class="text-right">QTD</th>
+                  <th class="text-right">VLR UNIT</th>
+                  <th class="text-right">VLR TOTAL</th>
+                  <th>PRAT</th>
+                  <th>CENTRO DE CONSUMO</th>
+                  <th>BASE</th>
+                </tr>
+              </thead>
+
+              <tbody id="lista-saidas">
+                <tr>
+                  <td colspan="10" class="empty-state">
+                    <div class="empty-state-icon">↻</div>
+                    <strong>Carregando saídas...</strong>
+                    <p>Aguarde enquanto as saídas são carregadas.</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="table-footer">
+            <span id="contador-saidas"> Aguardando dados das saídas </span>
+          </div>
+        </section>
+
+        <footer class="main-footer">
+          <span>ALMOX</span>
+          <span>•</span>
+          <span>Controle de estoque</span>
+        </footer>
+      </main>
+    </div>
+  </body>
+</html>

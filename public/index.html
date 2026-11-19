@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>ALMOX | Controle de Almoxarifado</title>
+
+    <link rel="stylesheet" href="css/style.css" />
+
+    <script src="js/itens.js" defer></script>
+  </head>
+
+  <body>
+    <div class="app-layout">
+      <aside class="sidebar">
+        <div class="brand">
+          <h1>ALMOX</h1>
+          <p>Controle de almoxarifado</p>
+        </div>
+
+        <nav class="main-navigation">
+          <a href="index.html" class="nav-link active">
+            <span class="nav-icon">▣</span>
+            <span>Estoque</span>
+          </a>
+
+          <a href="adicionar.html" class="nav-link">
+            <span class="nav-icon">＋</span>
+            <span>Movimentar estoque</span>
+          </a>
+
+          <a href="historico.html" class="nav-link">
+            <span class="nav-icon">↻</span>
+            <span>Histórico</span>
+          </a>
+        </nav>
+
+        <div class="sidebar-footer">
+          <p>ALMOX</p>
+          <span>Controle de estoque</span>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <header class="page-header">
+          <div>
+            <p class="eyebrow">GERENCIAMENTO</p>
+
+            <h2>Estoque</h2>
+
+            <p class="page-description">
+              Consulte os materiais cadastrados e suas respectivas quantidades.
+            </p>
+          </div>
+
+          <div class="header-actions">
+            <a href="adicionar.html" class="button button-primary">
+              <span>＋</span>
+              Movimentar estoque
+            </a>
+          </div>
+        </header>
+
+        <section class="summary-grid">
+          <article class="summary-card">
+            <div class="summary-heading">
+              <span class="summary-icon">#</span>
+              <span>Tipos de item</span>
+            </div>
+
+            <p id="total-tipos" class="summary-value">0</p>
+
+            <p class="summary-description">
+              Quantidade de materiais cadastrados
+            </p>
+          </article>
+
+          <article class="summary-card">
+            <div class="summary-heading">
+              <span class="summary-icon">▣</span>
+              <span>Unidades em estoque</span>
+            </div>
+
+            <p id="total-unidades" class="summary-value">0</p>
+
+            <p class="summary-description">Soma das quantidades disponíveis</p>
+          </article>
+
+          <article class="summary-card">
+            <div class="summary-heading">
+              <span class="summary-icon">R$</span>
+              <span>Valor total em estoque</span>
+            </div>
+
+            <p id="valor-total-estoque" class="summary-value">R$ 0,00</p>
+
+            <p class="summary-description">
+              Valor total dos materiais em estoque
+            </p>
+          </article>
+        </section>
+
+        <section class="inventory-section">
+          <div class="inventory-toolbar">
+            <div>
+              <h3>Itens em estoque</h3>
+
+              <p>
+                Consulte os materiais cadastrados e suas respectivas
+                informações.
+              </p>
+            </div>
+
+            <label class="search-wrapper">
+              <span aria-hidden="true">⌕</span>
+
+              <input
+                type="search"
+                id="busca-produto"
+                class="search-input"
+                placeholder="Buscar por PN, nome, tipo ou base..."
+                autocomplete="off"
+              />
+            </label>
+          </div>
+
+          <div class="table-container">
+            <table class="inventory-table">
+              <thead>
+                <tr>
+                  <th>NF</th>
+                  <th>DATA</th>
+                  <th>ITEM</th>
+                  <th>PN</th>
+                  <th>TIPO</th>
+                  <th class="text-right">QTD</th>
+                  <th>UF</th>
+                  <th class="text-right">VLR UNIT</th>
+                  <th class="text-right">VLR TOTAL</th>
+                  <th>PRAT</th>
+                  <th>BASE</th>
+                  <th class="text-right">MAX</th>
+                  <th class="text-right">MIN</th>
+                </tr>
+              </thead>
+
+              <tbody id="lista-itens">
+                <tr>
+                  <td colspan="13" class="empty-state">
+                    <div class="empty-state-icon">⌕</div>
+
+                    <strong> Carregando estoque... </strong>
+
+                    <p>
+                      Aguarde enquanto os itens do almoxarifado são carregados.
+                    </p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="table-footer">
+            <span id="contador-itens"> 0 itens encontrados </span>
+          </div>
+        </section>
+
+        <footer class="main-footer">
+          <span>ALMOX</span>
+          <span>•</span>
+          <span>Controle de estoque</span>
+        </footer>
+      </main>
+    </div>
+  </body>
+</html>
